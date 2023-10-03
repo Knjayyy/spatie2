@@ -43,8 +43,8 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('can:manage-suppliers')->group(function(){
         Route::post('/suppliers', [SupplierController::class, 'store']);
-        Route::post('/suppliers/create', [SupplierController::class, 'create']);
-        Route::post('/suppliers/{supplier}', [SupplierController::class, 'edit']);
+        Route::get('/suppliers/create', [SupplierController::class, 'create']);
+        Route::post('/suppliers/{supplier}', [SupplierController::class, 'edit'])->name('suppliers.edit');
     });
 });
 

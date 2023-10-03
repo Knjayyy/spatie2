@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
 {
@@ -12,19 +13,26 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        $user::User::create([
+        $user = User::create([
             'name' => 'Supplier',
             'email' => 'supplier@email.com',
             'password' => bcrypt('password'),
         ]);
 
-        $permission = Permission::create(['name' => 'manage_supplier']);
+        $managePermission = Permission::create(['name' => 'manage-suppliers']);
 
-        $permission->givePermissionTo('create-supplier');
-        $permission->givePermissionTo('edit-supplier');
-        $permission->givePermissionTo('view-supplier');
-        $permission->givePermissionTo('delete-supplier');
-        $permission->givePermissionTo('list-supplier');
+        $createSupplierPermission = Permission::create(['name' => 'create-supplier']);
+        $editSupplierPermission = Permission::create(['name' => 'edit-supplier']);
+        $viewSupplierPermission = Permission::create(['name' => 'view-supplier']);
+        $deleteSupplierPermission = Permission::create(['name' => 'delete-supplier']);
+        $listSupplierPermission = Permission::create(['name' => 'list-supplier']);
 
+        $managePermission->givePermissionTo($createSupplierPermission);
+        $managePermission->givePermissionTo($editSupplierPermission);
+        $managePermission->givePermissionTo($viewSupplierPermission);
+        $managePermission->givePermissionTo($deleteSupplierPermission);
+        $managePermission->givePermissionTo($listSupplierPermission);
+
+        $user->givePermissionTo($managePermission);
     }
 }

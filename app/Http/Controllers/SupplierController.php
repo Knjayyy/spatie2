@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -19,7 +20,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Clients/create');
     }
 
     /**
@@ -41,10 +42,12 @@ class SupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+
+    public function edit(Supplier $supplier)
     {
-        //
+        return inertia('Clients/edit', ['supplier' => $supplier]);
     }
+
 
     /**
      * Update the specified resource in storage.
