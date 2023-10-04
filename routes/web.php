@@ -38,13 +38,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/clients', [ClientController::class, 'index'])->name('clients');
 
-    Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers');
     // Route::get('/suppliers', [SupplierController::class, 'index']);
 
     Route::middleware('can:manage-suppliers')->group(function(){
+        Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers');
         Route::post('/suppliers', [SupplierController::class, 'store']);
-        Route::post('/suppliers/create', [SupplierController::class, 'create']);
-        Route::post('/suppliers/{supplier}', [SupplierController::class, 'edit']);
+        Route::get('/suppliers/create', [SupplierController::class, 'create']);
+        Route::post('/suppliers/{supplier}', [SupplierController::class, 'edit'])->name('suppliers.edit');
     });
 });
 

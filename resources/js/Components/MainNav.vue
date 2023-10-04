@@ -14,7 +14,9 @@ ss
         <Link :href="route('clients')" :active="route().current('clients')" title="Clients List">
             <i class="fa-solid fa-user"></i> <span :hidden="hidden">Clients List</span>
         </Link>
-        <Link :href="route('suppliers')" :active="route().current('suppliers')" title="Clients List">
+        <Link v-if="$page.props.auth.user.permissions.includes('manage-suppliers')" :href="route('suppliers')" :active="route().current('suppliers')" title="Suppliers List"
+
+        >
             <i class="fa-solid fa-user"></i> <span :hidden="hidden">Supplier</span>
         </Link>
         <Link :href="route('logout')" method="post" title="Logout">
